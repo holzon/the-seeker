@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="nThbGN" name="The Seeker" displaySplashScreen="1" reportAppUsage="1"
+              splashScreenColour="Dark" projectType="audioplug" version="1.0.0"
+              bundleIdentifier="com.himiltungl.labs.TheSeeker" includeBinaryInAppConfig="1"
+              cppLanguageStandard="latest" buildVST="1" buildVST3="1" buildAU="1"
+              buildAUv3="1" buildRTAS="0" buildAAX="0" buildStandalone="1"
+              enableIAA="0" pluginName="The Seeker" pluginDesc="Analyzer" pluginManufacturer="Himiltungl Labs"
+              pluginManufacturerCode="Hmtl" pluginCode="Tskr" pluginIsSynth="0"
+              pluginWantsMidiIn="0" pluginProducesMidiOut="0" pluginIsMidiEffectPlugin="0"
+              pluginEditorRequiresKeys="0" pluginAUExportPrefix="TheSeekerAU"
+              aaxIdentifier="com.himiltungl.labs.TheSeeker" pluginAAXCategory="2"
+              jucerVersion="5.3.2" companyName="Himiltungl Labs" companyWebsite="labs.himiltungl.com"
+              companyEmail="labs@himiltungl.com" pluginFormats="buildVST,buildVST3,buildAU,buildAUv3,buildStandalone"
+              pluginVSTCategory="kPlugCategAnalysis" pluginRTASDisableBypass="0"
+              pluginRTASDisableMultiMono="0" pluginAAXDisableBypass="0" pluginAAXDisableMultiMono="0"
+              pluginVST3Category="Analyzer">
+  <MAINGROUP id="jDzv6F" name="The Seeker">
+    <GROUP id="{65927EAC-A018-808C-C6D4-94B5CE6C88F1}" name="Source">
+      <FILE id="VJ51KF" name="PluginData.h" compile="0" resource="0" file="Source/PluginData.h"/>
+      <GROUP id="{064054A8-05C2-A0F7-9B09-8000B6A686EB}" name="Utils">
+        <FILE id="wIG64r" name="MeanIntegrator.cpp" compile="1" resource="0"
+              file="Source/Utils/MeanIntegrator.cpp"/>
+        <FILE id="pvLPmC" name="MeanIntegrator.h" compile="0" resource="0"
+              file="Source/Utils/MeanIntegrator.h"/>
+      </GROUP>
+      <GROUP id="{5B69A4B6-9DED-7E42-EFFD-67999CE2A3F6}" name="EQControlComponent">
+        <FILE id="M1bGNK" name="EQControlComponent.cpp" compile="1" resource="0"
+              file="Source/EQControlComponent/EQControlComponent.cpp"/>
+        <FILE id="aPdl9d" name="EQControlComponent.h" compile="0" resource="0"
+              file="Source/EQControlComponent/EQControlComponent.h"/>
+      </GROUP>
+      <GROUP id="{9ED62C37-BEA0-64B0-3FD9-8DA13C2C3BD6}" name="LookAndFeel">
+        <FILE id="wsbyXb" name="TheSeekerLookAndFeel.cpp" compile="1" resource="0"
+              file="Source/LookAndFeel/TheSeekerLookAndFeel.cpp"/>
+        <FILE id="YVPwDW" name="TheSeekerLookAndFeel.h" compile="0" resource="0"
+              file="Source/LookAndFeel/TheSeekerLookAndFeel.h"/>
+      </GROUP>
+      <GROUP id="{FB15C097-6F59-CD59-786C-DE4DC5E5A54F}" name="UIComponents">
+        <FILE id="fkaEFd" name="LabsLogo.cpp" compile="1" resource="0" file="Source/UIComponents/LabsLogo.cpp"/>
+        <FILE id="msyYZU" name="LabsLogo.h" compile="0" resource="0" file="Source/UIComponents/LabsLogo.h"/>
+        <FILE id="EkRy9N" name="ModeSelect.cpp" compile="1" resource="0" file="Source/UIComponents/ModeSelect.cpp"/>
+        <FILE id="EFJprd" name="ModeSelect.h" compile="0" resource="0" file="Source/UIComponents/ModeSelect.h"/>
+        <FILE id="m6i0he" name="MultiButton.cpp" compile="1" resource="0" file="Source/UIComponents/MultiButton.cpp"/>
+        <FILE id="TQUO3S" name="MultiButton.h" compile="0" resource="0" file="Source/UIComponents/MultiButton.h"/>
+        <FILE id="NteDSm" name="OctaveSelect.cpp" compile="1" resource="0"
+              file="Source/UIComponents/OctaveSelect.cpp"/>
+        <FILE id="HaETXj" name="OctaveSelect.h" compile="0" resource="0" file="Source/UIComponents/OctaveSelect.h"/>
+        <FILE id="j5WaM0" name="RmsSlider.cpp" compile="1" resource="0" file="Source/UIComponents/RmsSlider.cpp"/>
+        <FILE id="vlkrrs" name="RmsSlider.h" compile="0" resource="0" file="Source/UIComponents/RmsSlider.h"/>
+      </GROUP>
+      <GROUP id="{C7953CFD-AAA8-A25D-51C0-327F5FCE2BBC}" name="UILayer">
+        <FILE id="g7eL9i" name="UILayer.cpp" compile="1" resource="0" file="Source/UILayer/UILayer.cpp"/>
+        <FILE id="vXdGys" name="UILayer.h" compile="0" resource="0" file="Source/UILayer/UILayer.h"/>
+      </GROUP>
+      <GROUP id="{26FC9A12-D607-BDFB-F79C-63EEEA01C347}" name="SpectrumGraphComponentGL">
+        <FILE id="ISAQ2V" name="SpectrumGraphComponentGL.cpp" compile="1" resource="0"
+              file="Source/SpectrumGraphComponentGL/SpectrumGraphComponentGL.cpp"/>
+        <FILE id="c9D0hs" name="SpectrumGraphComponentGL.h" compile="0" resource="0"
+              file="Source/SpectrumGraphComponentGL/SpectrumGraphComponentGL.h"/>
+      </GROUP>
+      <GROUP id="{80C18989-227E-9B52-8059-9F6A6C70EB1F}" name="EQProcessor">
+        <FILE id="Gbu2JK" name="EQProcessor.cpp" compile="1" resource="0" file="Source/EQProcessor/EQProcessor.cpp"/>
+        <FILE id="GSfqzl" name="EQProcessor.h" compile="0" resource="0" file="Source/EQProcessor/EQProcessor.h"/>
+      </GROUP>
+      <GROUP id="{4AD1D0EE-DD13-C09C-E425-B223A007BDB0}" name="EQOptimizedProcessor">
+        <FILE id="khVoXH" name="EQOptimizedProcessor.cpp" compile="1" resource="0"
+              file="Source/EQOptimizedProcessor/EQOptimizedProcessor.cpp"/>
+        <FILE id="U2jdLp" name="EQOptimizedProcessor.h" compile="0" resource="0"
+              file="Source/EQOptimizedProcessor/EQOptimizedProcessor.h"/>
+      </GROUP>
+      <GROUP id="{13021DAF-253A-F19C-C6E2-DA1F0BDF1D7C}" name="WideIIRFilter">
+        <FILE id="TUyws5" name="WideIIRFilter.cpp" compile="1" resource="0"
+              file="Source/WideIIRFilter/WideIIRFilter.cpp"/>
+        <FILE id="LusBFO" name="WideIIRFilter.h" compile="0" resource="0" file="Source/WideIIRFilter/WideIIRFilter.h"/>
+        <FILE id="UOFpkr" name="WideIIRFilterEigen.cpp" compile="1" resource="0"
+              file="Source/WideIIRFilter/WideIIRFilterEigen.cpp"/>
+        <FILE id="iSsHOG" name="WideIIRFilterEigen.h" compile="0" resource="0"
+              file="Source/WideIIRFilter/WideIIRFilterEigen.h"/>
+        <FILE id="VSPpGV" name="WideIIRFilterJUCE.cpp" compile="1" resource="0"
+              file="Source/WideIIRFilter/WideIIRFilterJUCE.cpp"/>
+        <FILE id="j6ueQ8" name="WideIIRFilterJUCE.h" compile="0" resource="0"
+              file="Source/WideIIRFilter/WideIIRFilterJUCE.h"/>
+      </GROUP>
+      <GROUP id="{3632CC3D-E99A-8251-3880-3C0D0C0575DA}" name="EQSpec">
+        <FILE id="rn1pyX" name="EQSpec.cpp" compile="1" resource="0" file="Source/EQSpec/EQSpec.cpp"/>
+        <FILE id="s6UaZU" name="EQSpec.h" compile="0" resource="0" file="Source/EQSpec/EQSpec.h"/>
+      </GROUP>
+      <GROUP id="{7CE01131-EA75-F0A8-DDDB-8CB08704BFED}" name="EQReferenceProcessor">
+        <FILE id="lv3GDY" name="EQReferenceProcessor.cpp" compile="1" resource="0"
+              file="Source/EQReferenceProcessor/EQReferenceProcessor.cpp"/>
+        <FILE id="dGiu5i" name="EQReferenceProcessor.h" compile="0" resource="0"
+              file="Source/EQReferenceProcessor/EQReferenceProcessor.h"/>
+      </GROUP>
+      <GROUP id="{4D63105C-A478-6AA8-9F73-5AF3454C233A}" name="TestComponent">
+        <FILE id="UOowU9" name="TestComponent.cpp" compile="1" resource="0"
+              file="Source/TestComponent/TestComponent.cpp"/>
+        <FILE id="WGCL48" name="TestComponent.h" compile="0" resource="0" file="Source/TestComponent/TestComponent.h"/>
+      </GROUP>
+      <GROUP id="{E4733DC1-4501-215E-F8E4-65B3AC5D0A82}" name="SpectrumGraphComponent">
+        <FILE id="XNpOFx" name="SpectrumGraphComponent.cpp" compile="1" resource="0"
+              file="Source/SpectrumGraphComponent/SpectrumGraphComponent.cpp"/>
+        <FILE id="XTBNoY" name="SpectrumGraphComponent.h" compile="0" resource="0"
+              file="Source/SpectrumGraphComponent/SpectrumGraphComponent.h"/>
+      </GROUP>
+      <FILE id="AY4Hhu" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="KKjAJP" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="TTTvx9" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="vz9fFv" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX" extraDefs="">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="TheSeeker"
+                       headerPath="$(SRCROOT)/../../External/Eigen"/>
+        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="TheSeeker"
+                       headerPath="$(SRCROOT)/../../External/Eigen"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_video" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_opengl" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../JUCE/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+    <VS2017 targetFolder="Builds/VisualStudio2017">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" headerPath="$(SolutionDir)/../../External/Eigen"/>
+        <CONFIGURATION isDebug="0" name="Release" headerPath="$(SolutionDir)/../../External/Eigen"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_video" path="../../juce"/>
+        <MODULEPATH id="juce_opengl" path="../../juce"/>
+        <MODULEPATH id="juce_gui_extra" path="../../juce"/>
+        <MODULEPATH id="juce_gui_basics" path="../../juce"/>
+        <MODULEPATH id="juce_graphics" path="../../juce"/>
+        <MODULEPATH id="juce_events" path="../../juce"/>
+        <MODULEPATH id="juce_data_structures" path="../../juce"/>
+        <MODULEPATH id="juce_cryptography" path="../../juce"/>
+        <MODULEPATH id="juce_core" path="../../juce"/>
+        <MODULEPATH id="juce_audio_utils" path="../../juce"/>
+        <MODULEPATH id="juce_audio_processors" path="../../juce"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../juce"/>
+        <MODULEPATH id="juce_audio_formats" path="../../juce"/>
+        <MODULEPATH id="juce_audio_devices" path="../../juce"/>
+        <MODULEPATH id="juce_audio_basics" path="../../juce"/>
+      </MODULEPATHS>
+    </VS2017>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_video" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+  <JUCEOPTIONS JUCE_QUICKTIME="disabled"/>
+  <LIVE_SETTINGS>
+    <OSX headerPath="$(SRCROOT)/../../External/Eigen"/>
+    <WINDOWS/>
+  </LIVE_SETTINGS>
+</JUCERPROJECT>
