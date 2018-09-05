@@ -7,7 +7,7 @@ Licensed under GNU general public license v3, see [LICENSE](./LICENSE)
 
 # Requirements
 - [JUCE](https://juce.com/)
-- Visual Studio 201x for Windows builds
+- Visual Studio 2017 for Windows builds
 - XCode for macos builds
 - Probably [Steinberg VST 3 Audio Plug-Ins SDK](https://www.steinberg.net/en/company/developers.html)
 
