@@ -9,9 +9,12 @@ Licensed under GNU general public license v3, see [LICENSE](./LICENSE)
 - [JUCE](https://juce.com/)
 - Visual Studio 201x for Windows builds
 - XCode for macos builds
+- Probably [Steinberg VST 3 Audio Plug-Ins SDK](https://www.steinberg.net/en/company/developers.html)
 
 # Building
-- Open the Projucer project, and open it in Visual Studio or XCode
+- Open the Projucer project
+- Set SDK paths to VST 3 SDK for example
+- and open it in Visual Studio or XCode
 - Build debug or release, depending on what you want to do
 - If you succeed to build, you should find plug-ins in the Builds directory
 
