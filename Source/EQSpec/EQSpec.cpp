@@ -10,6 +10,7 @@
 
 #include "EQSpec.h"
 
+#include <algorithm>
 #include <array>
 #include <cmath>
 
@@ -113,25 +114,34 @@ void EQSpec::prepareToPlay (double sampleRate, int samplesPerBlock) {
     int eqtype = static_cast<int>(type);
     int denom = eqtype > 0 ? (3 << (eqtype - 1)) : 1;
     float fraction = 1.0f / denom;
-    int numbands = 12 * denom;
+    
+    constexpr double referencefreq = 440.0;
+    if (referencefreq >= sampleRate) {
+        // odd samplerate, maybe zero. Let's skip making bands anyway
+        return;
+    }
+    int numhighbands = static_cast<int>(denom * std::log2(std::min(sampleRate, 44100.0) * 0.5/referencefreq));
+    int numlowbands = numhighbands;
+    int numbands = numlowbands + numhighbands + 1;
+    int referenceband = numlowbands;
     bands.resize(numbands);
     const auto q = Q(1.0 * fraction);
     const double factor = pow(2.0, fraction);
-    int referenceband;
-    if (numbands == 12) {
-        referenceband = 6;
-    } else if (numbands == 36) {
-        referenceband = 19;
-    } else {
-        referenceband = ((numbands >> 1) + (denom >> 1) - 1);
-    } //6 : ((numbands >> 1) + (denom >> 1) - 1);
+    //int referenceband;
+    //if (numbands == 12) {
+    //    referenceband = 6;
+    //} else if (numbands == 36) {
+    //    referenceband = 19;
+    //} else {
+    //    referenceband = ((numbands >> 1) + (denom >> 1) - 1);
+    //} //6 : ((numbands >> 1) + (denom >> 1) - 1);
     std::list<EQBand> dynbands;
     dynbands.emplace_back(EQBand({440.0, IIRCoefficients::makeBandPass(sampleRate, 440.0, q) }));
     int generatedbands = 1;
     // generate upper bands
-    while(generatedbands < numbands) {
+    while(generatedbands < numhighbands + 1) {
         const auto freq = dynbands.back().frequency * factor;
-        if (freq >= 44100 * 0.5f) { // hard-coded against 44.1 kHz to be consistent across configurations
+        if (freq >= std::min(sampleRate, 44100.0) * 0.5) { // hard-coded against max 44.1 kHz to be consistent across configurations
             // pop the last one, we'll create a high pass filter below
             //dynbands.pop_back();
             break;

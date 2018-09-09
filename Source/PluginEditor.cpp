@@ -54,8 +54,7 @@ void TheSeekerAudioProcessorEditor::paint (Graphics& g)
     
     String no1 = renderingEngines[0];
     String no2 = renderingEngines[1];
-    
-    std::cout << "helloooo" << std::endl;
+
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (Colour (0xff080808));
 }

@@ -59,12 +59,17 @@ void EQOptimizedProcessor::processSamples(float* samples[], const int numSamples
 }
 
 void EQOptimizedProcessor::setRms(float ms) {
-    filter->setRms(ms);
+    // rmstime = ms; // Not necessary? filter reads from processor when it's created
+    if(filter) {
+        filter->setRms(ms);
+    }
 }
 
 void EQOptimizedProcessor::rms(std::vector<float>& values, std::vector<float>& gradient) {
     const SpinLock::ScopedLockType sl (filterlock);
-	filter->rms(values, gradient);
+    if (filter) {
+        filter->rms(values, gradient);
+    }
 }
 
 int EQOptimizedProcessor::numbands() const {

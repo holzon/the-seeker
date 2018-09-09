@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="nThbGN" name="The Seeker" displaySplashScreen="1" reportAppUsage="1"
-              splashScreenColour="Dark" projectType="audioplug" version="1.0.0"
+              splashScreenColour="Dark" projectType="audioplug" version="1.0.1"
               bundleIdentifier="com.himiltungl.labs.TheSeeker" includeBinaryInAppConfig="1"
               cppLanguageStandard="latest" buildVST="1" buildVST3="1" buildAU="1"
               buildAUv3="1" buildRTAS="0" buildAAX="0" buildStandalone="1"

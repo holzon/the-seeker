@@ -132,7 +132,7 @@ void SpectrumGraphComponent::paint (Graphics& g) {
         for (int i = 2; i < numFreqSteps; i += 2) {
             const float pos = horizScaleOffset * i;
             int band = pos * weight * numbands;
-            g.drawText((std::to_string(int(eqspec.getband(band).frequency)) + std::string(" Hz")).c_str(), pos - 20, getHeight() - 20, 40, 20, Justification::centred);
+            g.drawText((std::to_string(int(eqspec.getband(band).frequency)) + std::string(" Hz")).c_str(), pos - 40, getHeight() - 20, 80, 20, Justification::centred);
         }
         
     } else {
@@ -145,19 +145,14 @@ void SpectrumGraphComponent::paint (Graphics& g) {
 			const auto bandheight = bandpixelheight - bandyoffset;
             //const auto bandheight =(rms.size() + 1.0f) * bandpixelheight / rms.size();
             //g.setColour(Colour( 0.75f * float(i) / bands.size(), 1.0f, 1.0f, 1.0f));
-            g.setColour(Colour( 0.75f * float(i) / rms.size(), gradientsatoffset + gradientsatscale * std::abs(rmsgradient[i]), gradientvaloffset + gradientvalscale * std::abs(rmsgradient[i]), 1.0f));
+            //g.setColour(Colour( 0.75f * float(i) / rms.size(), gradientsatoffset + gradientsatscale * std::abs(rmsgradient[i]), gradientvaloffset + gradientvalscale * std::abs(rmsgradient[i]), 1.0f));
             //g.setGradientFill(gradient);
+            g.setFillType(FillType(Colour( 0.75f * float(i) / rms.size(), gradientsatoffset + gradientsatscale * std::abs(rmsgradient[i]), gradientvaloffset + gradientvalscale * std::abs(rmsgradient[i]), 1.0f)));
             
             
-            g.drawLine(i * bandpixeloffset + bandpixelwidth * 0.5f, bandyoffset, i * bandpixeloffset + bandpixelwidth * 0.5f, bandyoffset + bandheight, bandpixelwidth);
+            //g.drawLine(i * bandpixeloffset + bandpixelwidth * 0.5f, bandyoffset, i * bandpixeloffset + bandpixelwidth * 0.5f, bandyoffset + bandheight, bandpixelwidth);
+            g.fillRect(i * bandpixeloffset, bandyoffset, bandpixelwidth, bandheight);
             
-            if (i % bandoffset == 0) {
-                g.setColour(Colour(0xffffffff));
-                g.drawVerticalLine(i * bandpixeloffset + bandpixelwidth * 0.5f, getHeight() - 5.0f, getHeight());
-                
-                g.setFont(9.0f);
-                g.drawText((std::to_string(int(eqspec.getband(i).frequency)) + std::string(" Hz")).c_str(), i * bandpixeloffset + bandpixelwidth * 0.5f - 30, getHeight() - 20, 80, 20, Justification::centred);
-            }
             //g.drawVerticalLine(i * bandpixeloffset + bandpixelwidth * 0.5f, bandyoffset, bandyoffset + bandheight);
             
             //g.fillRect(Rectangle<float>(i * bandpixeloffset, bandyoffset, bandpixeloffset * 1.00f, bandheight));
@@ -170,6 +165,16 @@ void SpectrumGraphComponent::paint (Graphics& g) {
             //gradient.point2 = Point<float>(0.0f, 0.0f);
             //bands[i]->setFill(gradient);
             //bands[i]->setFill(ColourGradient(Colour(0.333f, 0.5f, 1.0f, 1.0f), Point<float>(0.0f, bandyoffset), Colour(0.5f, 1.0f, 0.0f, 1.0f), Point<float>(0.0f, bandyoffset + bandpixelheight * 0.05f), false));
+        }
+        
+        for (int i = 0; i < rms.size(); ++i) {
+            if (i % bandoffset == 0) {
+                g.setColour(Colour(0xffffffff));
+                g.drawVerticalLine(i * bandpixeloffset + bandpixelwidth * 0.5f, getHeight() - 5.0f, getHeight());
+                
+                g.setFont(9.0f);
+                g.drawText((std::to_string(int(eqspec.getband(i).frequency)) + std::string(" Hz")).c_str(), i * bandpixeloffset + bandpixelwidth * 0.5f - 40, getHeight() - 20, 80, 20, Justification::centred);
+            }
         }
         
     }
