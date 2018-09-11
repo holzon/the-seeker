@@ -55,7 +55,7 @@ void EQOptimizedProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 
 void EQOptimizedProcessor::processSamples(float* samples[], const int numSamples) noexcept {
     const SpinLock::ScopedLockType sl (filterlock);
-	filter->processSamples(samples[0], numSamples, numchannels);
+	filter->processSamples(samples, numSamples, numchannels);
 }
 
 void EQOptimizedProcessor::setRms(float ms) {

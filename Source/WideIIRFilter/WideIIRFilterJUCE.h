@@ -53,7 +53,7 @@ public:
     void reset() noexcept override;
     
     /** Performs the filter operation on the given set of samples. */
-    void processSamples (float* samples, int numSamples, int numChannels) noexcept override;
+    void processSamples (float* samples[], int numSamples, int numChannels) noexcept override;
 
 	const EQSpec& eqspec() override;
 
@@ -156,7 +156,7 @@ void WideIIRFilterJUCE<N>::resize(int numSamples, int numChannels) {
 }
 
 template <size_t N>
-void WideIIRFilterJUCE<N>::processSamples(float* const samples, const int numSamples, const int numChannels) noexcept
+void WideIIRFilterJUCE<N>::processSamples(float* samples[], const int numSamples, const int numChannels) noexcept
 {
     const SpinLock::ScopedLockType sl (processLock);
 
@@ -164,7 +164,15 @@ void WideIIRFilterJUCE<N>::processSamples(float* const samples, const int numSam
 
     if (active)
     {
-        Eigen::Map<Eigen::Array<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>, Eigen::Aligned16> inputsamples(samples, numChannels, numSamples);
+        //Eigen::Map<Eigen::Array<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>, Eigen::Aligned16> inputsamples(samples, numChannels, numSamples);
+
+		using arraymap = Eigen::Map<Eigen::Array<float, Eigen::Dynamic, 1>, Eigen::Unaligned>;
+		std::vector<arraymap> inputsamples;
+		for (int i = 0; i < numChannels; ++i)
+		{
+			inputsamples.emplace_back(samples[i], numSamples);
+		}
+
         // TODO: not optimal do go over channels like this, but necessary for rms?
         totalSampleMean.setZero();
         for (int i = 0; i < numSamples; ++i)
@@ -173,7 +181,7 @@ void WideIIRFilterJUCE<N>::processSamples(float* const samples, const int numSam
             for (int channel = 0; channel < numChannels; ++channel) {
                 auto& channelState = this->channelState[channel];
 
-                float& in = inputsamples(channel, i);
+                float& in = inputsamples[0](i);
                 out = coefficients.col(0) * in + channelState.v.col(0);
 
                 channelState.v.col(0) = coefficients.col(1) * in - coefficients.col(3) * out + channelState.v.col(1);

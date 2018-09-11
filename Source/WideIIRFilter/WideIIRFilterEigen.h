@@ -63,7 +63,7 @@ public:
     void reset() noexcept override;
     
     /** Performs the filter operation on the given set of samples. */
-    void processSamples (float* samples, int numSamples, int numChannels) noexcept override;
+    void processSamples (float* samples[], int numSamples, int numChannels) noexcept override;
 
 	const EQSpec& eqspec() override;
 
@@ -76,8 +76,9 @@ protected:
     struct ChannelState {
         ChannelState(){
             v.setZero();
+			//lv.setZero();
         }
-        Eigen::Array<float, N, 2> v, lv;
+		Eigen::Array<float, N, 2> v; //, lv;
         //std::vector<Eigen::Array<float, N, Eigen::Dynamic>> buffer;
     };
     std::vector<ChannelState> channelState;
@@ -247,7 +248,7 @@ private:
 };
 
 template <size_t N>
-void WideIIRFilterEigen<N>::processSamples(float* const samples, const int numSamples, const int numChannels) noexcept
+void WideIIRFilterEigen<N>::processSamples(float* samples[], const int numSamples, const int numChannels) noexcept
 {
     const SpinLock::ScopedLockType sl (processLock);
     ForcedScopedNoDenormals s;
@@ -257,7 +258,13 @@ void WideIIRFilterEigen<N>::processSamples(float* const samples, const int numSa
     if (active)
     {
         //Eigen::Map<Eigen::Array<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>, Eigen::Aligned16> inputsamples(samples, numChannels, numSamples);
-		Eigen::Map<Eigen::Array<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>, Eigen::Unaligned> inputsamples(samples, numChannels, numSamples);
+		//Eigen::Map<Eigen::Array<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>, Eigen::Unaligned> inputsamples(samples, numChannels, numSamples);
+		using arraymap = Eigen::Map<Eigen::Array<float, Eigen::Dynamic, 1>, Eigen::Unaligned>;
+		std::vector<arraymap> inputsamples;
+		for (int i = 0; i < numChannels; ++i)
+		{
+			inputsamples.emplace_back(samples[i], numSamples);
+		}
         // TODO: not optimal to go over channels like this, but necessary for rms?
         //totalSampleMean.setZero();
         
@@ -272,12 +279,13 @@ void WideIIRFilterEigen<N>::processSamples(float* const samples, const int numSa
             for (int channel = 0; channel < numChannels; ++channel) {
                 auto& channelState = this->channelState[channel];
 
-                float& in = inputsamples(channel, i);
+                float& in = inputsamples[channel](i);
                 out = coefficients.col(0) * in + channelState.v.col(0);
 
                 channelState.v.col(0) = coefficients.col(1) * in - coefficients.col(3) * out + channelState.v.col(1);
                 channelState.v.col(1) = coefficients.col(2) * in - coefficients.col(4) * out;
-                
+				assert(!isnan(channelState.v(0, 0)));
+
                 // snap to zero
 //#if JUCE_INTEL
                 //channelState.v = channelState.v.unaryExpr(std::ref(snapToZero));

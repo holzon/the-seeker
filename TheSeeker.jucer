@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="nThbGN" name="The Seeker" displaySplashScreen="1" reportAppUsage="1"
-              splashScreenColour="Dark" projectType="audioplug" version="1.0.1"
+              splashScreenColour="Dark" projectType="audioplug" version="1.0.2"
               bundleIdentifier="com.himiltungl.labs.TheSeeker" includeBinaryInAppConfig="1"
               cppLanguageStandard="latest" buildVST="1" buildVST3="1" buildAU="1"
               buildAUv3="1" buildRTAS="0" buildAAX="0" buildStandalone="1"
@@ -113,7 +113,7 @@
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX" extraDefs="">
+    <XCODE_MAC targetFolder="Builds/MacOSX" extraDefs="" vst3Folder="">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="TheSeeker"
                        headerPath="$(SRCROOT)/../../External/Eigen"/>
@@ -138,7 +138,7 @@
         <MODULEPATH id="juce_audio_utils" path="../JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
-    <VS2017 targetFolder="Builds/VisualStudio2017">
+    <VS2017 targetFolder="Builds/VisualStudio2017" vst3Folder="">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" headerPath="$(SolutionDir)/../../External/Eigen"/>
         <CONFIGURATION isDebug="0" name="Release" headerPath="$(SolutionDir)/../../External/Eigen"/>

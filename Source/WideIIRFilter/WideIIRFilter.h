@@ -42,7 +42,7 @@ public:
     virtual void reset() noexcept = 0;
     
     /** Performs the filter operation on the given set of samples. */
-    virtual void processSamples (float* samples, int numSamples, int numChannels) noexcept = 0;
+    virtual void processSamples (float* samples[], int numSamples, int numChannels) noexcept = 0;
 
 	virtual const EQSpec& eqspec() = 0;
     

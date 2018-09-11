@@ -94,7 +94,7 @@ void SpectrumGraphComponent::paint (Graphics& g) {
             //const auto bandyoffset = (1.0 - (0.015 * Decibels::gainToDecibels(rms[band] * rmsscale) + 0.75)) * bandpixelheight;
             const auto bandyoffset = -dbScale * (Decibels::gainToDecibels(rms[band] * rmsscale) - dBmax);
             //const auto bandheight =(rms.size() + 1.0f) * bandpixelheight / rms.size();
-            const auto bandheight = bandpixelheight - bandyoffset;
+            const auto bandheight = std::max(0.0f, bandpixelheight - bandyoffset);
             //g.setColour(Colour( 0.75f * float(band) / bands.size(), 1.0f, 1.0f, 1.0f));
             g.setColour(Colour( 0.75f * float(band) / rms.size(), gradientsatoffset + gradientsatscale * std::abs(rmsgradient[band]), gradientvaloffset + gradientvalscale * std::abs(rmsgradient[band]), 1.0f));
             //g.setGradientFill(gradient);
@@ -142,7 +142,7 @@ void SpectrumGraphComponent::paint (Graphics& g) {
             //const auto bandyoffset = (1.0 - 4.0 * log(1.0 * rms[i] + 1.0)) * bandpixelheight;
             //const auto bandyoffset = (1.0 - (0.015 * Decibels::gainToDecibels(rms[i] * rmsscale) + 0.75)) * bandpixelheight;
 			const auto bandyoffset = -dbScale * (Decibels::gainToDecibels(rms[i] * rmsscale) - dBmax);
-			const auto bandheight = bandpixelheight - bandyoffset;
+			const auto bandheight = std::max(0.0f, bandpixelheight - bandyoffset);
             //const auto bandheight =(rms.size() + 1.0f) * bandpixelheight / rms.size();
             //g.setColour(Colour( 0.75f * float(i) / bands.size(), 1.0f, 1.0f, 1.0f));
             //g.setColour(Colour( 0.75f * float(i) / rms.size(), gradientsatoffset + gradientsatscale * std::abs(rmsgradient[i]), gradientvaloffset + gradientvalscale * std::abs(rmsgradient[i]), 1.0f));
