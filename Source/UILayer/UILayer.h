@@ -12,7 +12,7 @@
 
 #include "../../JuceLibraryCode/JuceHeader.h"
 #include "../PluginProcessor.h"
-#include "../UIComponents/LabsLogo.h"
+#include "../UIComponents/LogoAndTitle.h"
 #include "../UIComponents/ModeSelect.h"
 #include "../UIComponents/OctaveSelect.h"
 #include "../UIComponents/RmsSlider.h"
@@ -30,8 +30,7 @@ public:
     void resized() override;
 
 private:
-    Label title;
-    LabsLogo logo;
+    LogoAndTitle logoandtitle;
     ModeSelect modeselect;
     OctaveSelect octaveselect;
     RmsSlider rmsslider;

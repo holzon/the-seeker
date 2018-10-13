@@ -11,20 +11,22 @@
 #pragma once
 
 #include "../../JuceLibraryCode/JuceHeader.h"
+#include "LabsLogo.h"
 
 //==============================================================================
 /*
 */
-class LabsLogo    : public Component
+class LogoAndTitle    : public Component, public MouseListener
 {
 public:
-    LabsLogo();
-    ~LabsLogo();
+    LogoAndTitle();
+    ~LogoAndTitle();
 
     void paint (Graphics&) override;
     void resized() override;
+    void mouseUp(const MouseEvent&) override;
 private:
-    void createLogo();
-    std::shared_ptr<Drawable> logo;
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LabsLogo)
+    Label title;
+    LabsLogo logo;
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LogoAndTitle)
 };

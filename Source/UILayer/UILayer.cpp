@@ -19,13 +19,11 @@ rmsslider(processor)
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
     //setOpaque(false);
-    addAndMakeVisible(title);
-    addAndMakeVisible(logo);
+
     //addAndMakeVisible(modeselect);
+    addAndMakeVisible(logoandtitle);
     addAndMakeVisible(octaveselect);
     addAndMakeVisible(rmsslider);
-    title.setText ("THE SEEKER", dontSendNotification);
-    title.setJustificationType(Justification::topRight);
 }
 
 UILayer::~UILayer()
@@ -49,6 +47,10 @@ void UILayer::resized()
     // This method is where you should set the bounds of any child
     // components that your component contains..
     auto area (getLocalBounds().reduced (12));
+    auto logoarea (area);
+    logoarea = (logoarea.removeFromRight(192));
+    logoarea = (logoarea.removeFromTop(76));
+    logoandtitle.setBounds(logoarea);
 
     auto top (area.removeFromTop (48));
     auto bottom (area.removeFromBottom (48));
@@ -57,22 +59,17 @@ void UILayer::resized()
     //modeselect.setBounds(toplefttop);
     
     auto topright1 (top.removeFromRight(192));
-    logo.setBounds(topright1);
     top.removeFromRight(8);
     auto topright2 (top.removeFromRight(96));
     top.removeFromRight(4);
     auto topright3 (top.removeFromRight(96));
     
     auto rightpanel (area.removeFromRight(108));
-    auto rightpaneltemp = rightpanel;
     
     int numitems = 2;
     int itemheight = numitems * 28 + 8;
     int itemoffset = (rightpanel.getHeight() - itemheight) * 0.5f;
-    
-    auto rightpanel1 (rightpaneltemp.removeFromTop(28));
-    rightpanel1.translate(0, -16);
-    title.setBounds(rightpanel1);
+
     // offset items
     rightpanel.removeFromTop(itemoffset);
     auto rightpanel2 (rightpanel.removeFromTop(28));

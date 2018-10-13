@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="nThbGN" name="The Seeker" displaySplashScreen="1" reportAppUsage="1"
-              splashScreenColour="Dark" projectType="audioplug" version="1.0.2"
+              splashScreenColour="Dark" projectType="audioplug" version="1.0.3"
               bundleIdentifier="com.himiltungl.labs.TheSeeker" includeBinaryInAppConfig="1"
               cppLanguageStandard="latest" buildVST="1" buildVST3="1" buildAU="1"
               buildAUv3="1" buildRTAS="0" buildAAX="0" buildStandalone="1"
@@ -39,6 +39,9 @@
       <GROUP id="{FB15C097-6F59-CD59-786C-DE4DC5E5A54F}" name="UIComponents">
         <FILE id="fkaEFd" name="LabsLogo.cpp" compile="1" resource="0" file="Source/UIComponents/LabsLogo.cpp"/>
         <FILE id="msyYZU" name="LabsLogo.h" compile="0" resource="0" file="Source/UIComponents/LabsLogo.h"/>
+        <FILE id="AsdFVx" name="LogoAndTitle.cpp" compile="1" resource="0"
+              file="Source/UIComponents/LogoAndTitle.cpp"/>
+        <FILE id="dOiNlS" name="LogoAndTitle.h" compile="0" resource="0" file="Source/UIComponents/LogoAndTitle.h"/>
         <FILE id="EkRy9N" name="ModeSelect.cpp" compile="1" resource="0" file="Source/UIComponents/ModeSelect.cpp"/>
         <FILE id="EFJprd" name="ModeSelect.h" compile="0" resource="0" file="Source/UIComponents/ModeSelect.h"/>
         <FILE id="m6i0he" name="MultiButton.cpp" compile="1" resource="0" file="Source/UIComponents/MultiButton.cpp"/>
@@ -141,7 +144,8 @@
     <VS2017 targetFolder="Builds/VisualStudio2017" vst3Folder="">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" headerPath="$(SolutionDir)/../../External/Eigen"/>
-        <CONFIGURATION isDebug="0" name="Release" headerPath="$(SolutionDir)/../../External/Eigen"/>
+        <CONFIGURATION isDebug="0" name="Release" headerPath="$(SolutionDir)/../../External/Eigen"
+                       useRuntimeLibDLL="0"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_video" path="../../juce"/>
