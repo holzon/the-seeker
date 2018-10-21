@@ -24,7 +24,7 @@ class WideIIRFilter;
 class EQOptimizedProcessor : public EQProcessor {
 public:
     EQOptimizedProcessor(TheSeekerAudioProcessor& processor, EQSpec spec, int numchannels);
-    ~EQOptimizedProcessor(); 
+    ~EQOptimizedProcessor();
     void prepareToPlay (double sampleRate, int samplesPerBlock);
     void processSamples (float* samples[], const int numSamples) noexcept;
     void setRms(float ms) override;
@@ -33,18 +33,21 @@ public:
     void setEqType(EQSpec::EQType type) override;
     EQSpec::EQType eqtype() const override;
     EQSpec eqspec() const override;
+    int level() const override;
+    void level(int value) override;
 private:
     SpinLock filterlock;
     EQSpec spec;
+    int _level = 0;
 
 	TheSeekerAudioProcessor& processor;
-    
+
     struct EQBand {
         std::shared_ptr<AudioSampleBuffer> buffer;
         double gain;
         double rms;
     };
-    
+
     std::unique_ptr<WideIIRFilter> filter;
     std::vector<std::vector<EQBand>> bands;
     std::vector<double> rmslevels;

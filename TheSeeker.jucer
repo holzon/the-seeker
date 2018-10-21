@@ -39,6 +39,8 @@
       <GROUP id="{FB15C097-6F59-CD59-786C-DE4DC5E5A54F}" name="UIComponents">
         <FILE id="fkaEFd" name="LabsLogo.cpp" compile="1" resource="0" file="Source/UIComponents/LabsLogo.cpp"/>
         <FILE id="msyYZU" name="LabsLogo.h" compile="0" resource="0" file="Source/UIComponents/LabsLogo.h"/>
+        <FILE id="rVgkp8" name="LevelSlider.cpp" compile="1" resource="0" file="Source/UIComponents/LevelSlider.cpp"/>
+        <FILE id="zsjaeH" name="LevelSlider.h" compile="0" resource="0" file="Source/UIComponents/LevelSlider.h"/>
         <FILE id="AsdFVx" name="LogoAndTitle.cpp" compile="1" resource="0"
               file="Source/UIComponents/LogoAndTitle.cpp"/>
         <FILE id="dOiNlS" name="LogoAndTitle.h" compile="0" resource="0" file="Source/UIComponents/LogoAndTitle.h"/>
@@ -54,6 +56,8 @@
         <FILE id="jEGkPC" name="SettingsPanel.cpp" compile="1" resource="0"
               file="Source/UIComponents/SettingsPanel.cpp"/>
         <FILE id="Q4QQgk" name="SettingsPanel.h" compile="0" resource="0" file="Source/UIComponents/SettingsPanel.h"/>
+        <FILE id="c4DcQ6" name="SliderLabel.cpp" compile="1" resource="0" file="Source/UIComponents/SliderLabel.cpp"/>
+        <FILE id="LmUowB" name="SliderLabel.h" compile="0" resource="0" file="Source/UIComponents/SliderLabel.h"/>
       </GROUP>
       <GROUP id="{C7953CFD-AAA8-A25D-51C0-327F5FCE2BBC}" name="UILayer">
         <FILE id="g7eL9i" name="UILayer.cpp" compile="1" resource="0" file="Source/UILayer/UILayer.cpp"/>

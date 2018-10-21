@@ -14,10 +14,10 @@
 
 //#include <Eigen/Dense>
 
-EQOptimizedProcessor::EQOptimizedProcessor(TheSeekerAudioProcessor& processor, EQSpec spec, int numchannels) : 
-processor(processor), spec(spec), numchannels(numchannels) 
+EQOptimizedProcessor::EQOptimizedProcessor(TheSeekerAudioProcessor& processor, EQSpec spec, int numchannels) :
+processor(processor), spec(spec), numchannels(numchannels)
 {
-    
+
 }
 
 EQOptimizedProcessor::~EQOptimizedProcessor() = default;
@@ -50,7 +50,7 @@ void EQOptimizedProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
             //filters[channel].push_back({ std::make_unique<IIRFilter>(spec.getband(filter).coefficients), std::make_unique<AudioSampleBuffer>(numchannels, samplesPerBlock) });
         }
     }
-    
+
 }
 
 void EQOptimizedProcessor::processSamples(float* samples[], const int numSamples) noexcept {
@@ -81,7 +81,7 @@ void EQOptimizedProcessor::setEqType(EQSpec::EQType type) {
         const SpinLock::ScopedLockType sl (filterlock);
         // reset eqprocessor
         spec = EQSpec(type);
-    
+
     prepareToPlay(sampleRate, samplesPerBlock);
     }
 }
@@ -94,4 +94,14 @@ EQSpec::EQType EQOptimizedProcessor::eqtype() const {
 EQSpec EQOptimizedProcessor::eqspec() const {
     const SpinLock::ScopedLockType sl (filterlock);
     return spec;
+}
+
+int EQOptimizedProcessor::level() const {
+    const SpinLock::ScopedLockType sl (filterlock);
+    return _level;
+}
+
+void EQOptimizedProcessor::level(int value) {
+    const SpinLock::ScopedLockType sl (filterlock);
+    _level = value;
 }

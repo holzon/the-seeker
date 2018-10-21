@@ -56,15 +56,15 @@ void UILayer::resized()
     auto topleft (top.removeFromLeft(148));
     auto toplefttop = topleft.removeFromTop(28);
     //modeselect.setBounds(toplefttop);
-    
+
     auto topright1 (top.removeFromRight(192));
     top.removeFromRight(8);
     auto topright2 (top.removeFromRight(96));
     top.removeFromRight(4);
     auto topright3 (top.removeFromRight(96));
-    
+
     auto rightpanel (completearea.removeFromRight(132));
-    rightpanel = rightpanel.withSizeKeepingCentre(rightpanel.getWidth(), rightpanel.getHeight() - 200);
+    rightpanel = rightpanel.withSizeKeepingCentre(rightpanel.getWidth(), rightpanel.getHeight() - 152);
     settings.setBounds(rightpanel);
 
 //    area.removeFromTop(8);

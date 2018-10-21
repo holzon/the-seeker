@@ -47,11 +47,21 @@ TheSeekerAudioProcessor::TheSeekerAudioProcessor() :
 		false,
 		false,
 		true);
+	parameters.createAndAddParameter("level", // parameter ID
+		"Level", // parameter name
+		{},
+		NormalisableRange<float>(-30.0f, 0.0f),
+		0.0f,
+		nullptr,
+		nullptr,
+		false,
+		false);
 
 	parameters.state = ValueTree(Identifier("TheSeekerSettings"));
 
 	float time = *parameters.getRawParameterValue("time");
 	float res = *parameters.getRawParameterValue("res");
+	float level = *parameters.getRawParameterValue("level");
 
 //    eqprocessor = std::make_unique<EQReferenceProcessor>(EQSpec(EQSpec::EQType::EQ_512_BAND_CUSTOM), getTotalNumInputChannels(), 64);
     eqprocessor = std::make_shared<EQOptimizedProcessor>(*this, EQSpec(static_cast<EQSpec::EQType>(int(*parameters.getRawParameterValue("res")) - 1)), getTotalNumInputChannels());
@@ -119,7 +129,7 @@ void TheSeekerAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBl
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
-    
+
     //IIRCoefficients ic = IIRCoefficients::makeBandPass(sampleRate, 440.0);
     //filters.clear();
     //for(int i = 0; i < getTotalNumInputChannels(); ++i) {
@@ -127,7 +137,7 @@ void TheSeekerAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBl
     //    filter->setCoefficients(ic);
     //    filters.add(filter);
     //}
-    
+
     eqprocessor->prepareToPlay(sampleRate, samplesPerBlock);
 }
 
@@ -178,7 +188,7 @@ void TheSeekerAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffe
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
     //float* channels[totalNumInputChannels];
-	
+
 	//float* channels[totalNumInputChannels];
 	if (channels.size() != totalNumInputChannels) {
 		channels.resize(totalNumInputChannels);
@@ -243,6 +253,14 @@ void TheSeekerAudioProcessor::setEqType(EQSpec::EQType type) {
 	//*plugindata.res = static_cast<int>(type) + 1;
 	//parameters.getParameterAsValue("res").setValue(static_cast<int>(type) + 1);
 	eqprocessor->setEqType(type);
+}
+
+int TheSeekerAudioProcessor::level() const {
+    return *parameters.getRawParameterValue("level");
+}
+
+void TheSeekerAudioProcessor::level(int value) {
+    eqprocessor->level(value);
 }
 
 AudioProcessorValueTreeState& TheSeekerAudioProcessor::data() {

@@ -18,11 +18,11 @@
 /*
 */
 
-class RmsSlider    : public Component, private Slider::Listener
+class LevelSlider    : public Component, private Slider::Listener
 {
 public:
-    RmsSlider(TheSeekerAudioProcessor& processor);
-    ~RmsSlider();
+    LevelSlider(TheSeekerAudioProcessor& processor);
+    ~LevelSlider();
 
     void paint (Graphics&) override;
     void resized() override;
@@ -37,5 +37,5 @@ private:
     Slider slider;
     SliderLabel sliderlabelwhite;
 	AudioProcessorValueTreeState::SliderAttachment attachment;
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (RmsSlider)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LevelSlider)
 };
