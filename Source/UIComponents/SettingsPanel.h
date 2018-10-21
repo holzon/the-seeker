@@ -1,7 +1,7 @@
 /*
   ==============================================================================
 
-    LabsLogo.h
+    SettingsPanel.h
     Created: 4 Oct 2017 11:14:25am
     Author:  JENS OLSSON
 
@@ -11,22 +11,27 @@
 #pragma once
 
 #include "../../JuceLibraryCode/JuceHeader.h"
-#include "LabsLogo.h"
+#include "../UIComponents/OctaveSelect.h"
+#include "../UIComponents/RmsSlider.h"
 
 //==============================================================================
 /*
 */
-class LogoAndTitle    : public Component
+class SettingsPanel    : public Component
 {
 public:
-    LogoAndTitle();
-    ~LogoAndTitle();
+    SettingsPanel(TheSeekerAudioProcessor& processor);
+    ~SettingsPanel();
 
     void paint (Graphics&) override;
     void resized() override;
     void mouseUp(const MouseEvent&) override;
 private:
-    Label title;
-    LabsLogo logo;
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LogoAndTitle)
+    void updateVisibleState();
+    bool visible = true;
+    OctaveSelect octaveselect;
+    RmsSlider rmsslider;
+    DrawablePath hide_triangle;
+	DrawablePath show_triangle;
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SettingsPanel)
 };

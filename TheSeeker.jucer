@@ -51,6 +51,9 @@
         <FILE id="HaETXj" name="OctaveSelect.h" compile="0" resource="0" file="Source/UIComponents/OctaveSelect.h"/>
         <FILE id="j5WaM0" name="RmsSlider.cpp" compile="1" resource="0" file="Source/UIComponents/RmsSlider.cpp"/>
         <FILE id="vlkrrs" name="RmsSlider.h" compile="0" resource="0" file="Source/UIComponents/RmsSlider.h"/>
+        <FILE id="jEGkPC" name="SettingsPanel.cpp" compile="1" resource="0"
+              file="Source/UIComponents/SettingsPanel.cpp"/>
+        <FILE id="Q4QQgk" name="SettingsPanel.h" compile="0" resource="0" file="Source/UIComponents/SettingsPanel.h"/>
       </GROUP>
       <GROUP id="{C7953CFD-AAA8-A25D-51C0-327F5FCE2BBC}" name="UILayer">
         <FILE id="g7eL9i" name="UILayer.cpp" compile="1" resource="0" file="Source/UILayer/UILayer.cpp"/>

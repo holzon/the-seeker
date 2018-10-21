@@ -13,8 +13,7 @@
 
 //==============================================================================
 UILayer::UILayer(TheSeekerAudioProcessor& processor) :
-octaveselect(processor),
-rmsslider(processor)
+settings(processor)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
@@ -22,8 +21,7 @@ rmsslider(processor)
 
     //addAndMakeVisible(modeselect);
     addAndMakeVisible(logoandtitle);
-    addAndMakeVisible(octaveselect);
-    addAndMakeVisible(rmsslider);
+    addAndMakeVisible(settings);
 }
 
 UILayer::~UILayer()
@@ -46,6 +44,7 @@ void UILayer::resized()
 {
     // This method is where you should set the bounds of any child
     // components that your component contains..
+	auto completearea(getLocalBounds());
     auto area (getLocalBounds().reduced (12));
     auto logoarea (area);
     logoarea = (logoarea.removeFromRight(192));
@@ -64,21 +63,10 @@ void UILayer::resized()
     top.removeFromRight(4);
     auto topright3 (top.removeFromRight(96));
     
-    auto rightpanel (area.removeFromRight(108));
-    
-    int numitems = 2;
-    int itemheight = numitems * 28 + 8;
-    int itemoffset = (rightpanel.getHeight() - itemheight) * 0.5f;
+    auto rightpanel (completearea.removeFromRight(132));
+    rightpanel = rightpanel.withSizeKeepingCentre(rightpanel.getWidth(), rightpanel.getHeight() - 200);
+    settings.setBounds(rightpanel);
 
-    // offset items
-    rightpanel.removeFromTop(itemoffset);
-    auto rightpanel2 (rightpanel.removeFromTop(28));
-    rightpanel.removeFromTop(8);
-    auto rightpanel3 (rightpanel.removeFromTop(28));
-
-    rmsslider.setBounds(rightpanel2);
-    octaveselect.setBounds(rightpanel3);
-    
 //    area.removeFromTop(8);
 //    auto belowtop = area.removeFromTop(48);
 //    auto belowtopright (belowtop.removeFromRight(192));

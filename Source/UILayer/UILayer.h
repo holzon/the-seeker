@@ -13,9 +13,7 @@
 #include "../../JuceLibraryCode/JuceHeader.h"
 #include "../PluginProcessor.h"
 #include "../UIComponents/LogoAndTitle.h"
-#include "../UIComponents/ModeSelect.h"
-#include "../UIComponents/OctaveSelect.h"
-#include "../UIComponents/RmsSlider.h"
+#include "../UIComponents/SettingsPanel.h"
 
 //==============================================================================
 /*
@@ -31,8 +29,6 @@ public:
 
 private:
     LogoAndTitle logoandtitle;
-    ModeSelect modeselect;
-    OctaveSelect octaveselect;
-    RmsSlider rmsslider;
+    SettingsPanel settings;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (UILayer)
 };
