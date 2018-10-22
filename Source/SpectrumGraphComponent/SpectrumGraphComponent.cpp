@@ -99,6 +99,7 @@ void SpectrumGraphComponent::paint (Graphics& g) {
 
     const int numbands = rms.size();
 	int	mouseoverband = std::min(static_cast<int>((mouse_x / (float)getWidth()) * numbands), numbands - 1);
+	const float mouseovergain = -mouse_y / dbScale + dBmax;
 
     if (gutter == 0.0f) {
         const float weight = 1.0f / getWidth();
@@ -213,8 +214,6 @@ void SpectrumGraphComponent::paint (Graphics& g) {
 	if (displaydata) {
 		double frequency = eqspec.getband(mouseoverband).frequency;
 		double gain = Decibels::gainToDecibels(rms[mouseoverband] * rmsscale) - dBmax;
-		g.setColour(Colour(0xffffffff));
-		g.setFont(9.0f);
 		int displaypadding = 64;
 		int displayoffset_x = 20;
 		int displayoffset_y = -1;
@@ -222,8 +221,13 @@ void SpectrumGraphComponent::paint (Graphics& g) {
 		int displayheight = 20;
 		int displaypos_x = std::max(displaypadding, std::min(std::max(0, mouse_x) + displayoffset_x, getWidth() - displayoffset_x - displaywidth - displaypadding));
 		int displaypos_y = std::max(displaypadding, std::min(std::max(0, mouse_y) + displayoffset_y, getHeight() - displayoffset_y - displayheight - displaypadding));
-		g.drawText(("freq: " + tostring(frequency) + std::string(" Hz")).c_str(), displaypos_x, displaypos_y, 100, 10, Justification::left);
-		g.drawText(("gain: " + tostring(gain) + std::string(" dB")).c_str(), displaypos_x, displaypos_y + 10, 100, 10, Justification::left);
+		g.setColour(Colour(0xaa000000));
+		g.fillRoundedRectangle(Rectangle<float>(displaypos_x - 3, displaypos_y - 3, 56, 26), 3.0);
+		g.setColour(Colour(0xffffffff));
+		g.setFont(9.0f);
+		g.drawText(("x: " + tostring(frequency) + std::string(" Hz")).c_str(), displaypos_x, displaypos_y, 100, 10, Justification::left);
+		//g.drawText(("y: " + tostring(gain) + std::string(" dB")).c_str(), displaypos_x, displaypos_y + 10, 100, 10, Justification::left);
+		g.drawText(("y: " + tostring(mouseovergain) + std::string(" dB")).c_str(), displaypos_x, displaypos_y + 10, 100, 10, Justification::left);
 	}
 
 }
