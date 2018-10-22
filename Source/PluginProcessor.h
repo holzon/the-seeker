@@ -74,6 +74,12 @@ public:
     int level() const;
     void level(int value);
 
+	//bool showsettings() const;
+	//void showsettings(bool value);
+
+	//bool showlogo() const;
+	//void showlogo(bool value);
+
     std::shared_ptr<EQOptimizedProcessor> eqprocessor;
 
 	AudioProcessorValueTreeState& data();

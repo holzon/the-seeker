@@ -13,9 +13,11 @@
 
 //==============================================================================
 SettingsPanel::SettingsPanel(TheSeekerAudioProcessor& processor) :
+processor(processor),
 octaveselect(processor),
 rmsslider(processor),
-levelslider(processor)
+levelslider(processor),
+Button("")
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
@@ -36,6 +38,9 @@ levelslider(processor)
     addChildComponent(hide_triangle);
     addChildComponent(show_triangle);
     updateVisibleState();
+	setClickingTogglesState(true);
+
+	attachment.reset(new AudioProcessorValueTreeState::ButtonAttachment(processor.data(), "showsettings", *this));
 }
 
 SettingsPanel::~SettingsPanel()
@@ -47,15 +52,21 @@ void SettingsPanel::paint (Graphics& g)
 
 }
 
-void SettingsPanel::mouseUp(const MouseEvent& event)
+void SettingsPanel::paintButton(Graphics& g,
+	bool isMouseOverButton,
+	bool isButtonDown) {
+
+}
+
+void SettingsPanel::clicked()
 {
-    visible = !visible;
-    updateVisibleState();
+	updateVisibleState();
 }
 
 void SettingsPanel::updateVisibleState()
 {
-    levelslider.setVisible(visible);
+	visible = getToggleState();
+	levelslider.setVisible(visible);
     octaveselect.setVisible(visible);
     rmsslider.setVisible(visible);
     hide_triangle.setVisible(visible);
@@ -96,5 +107,5 @@ void SettingsPanel::resized()
     hide_triangle.setOriginWithOriginalSize(Point<float>(triangle_offset_x, triangle_offset_y));
     show_triangle.setBounds(completearea);
     show_triangle.setOriginWithOriginalSize(Point<float>(triangle_offset_x, triangle_offset_y));
-
+	updateVisibleState();
 }

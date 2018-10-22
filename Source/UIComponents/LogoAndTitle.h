@@ -12,21 +12,26 @@
 
 #include "../../JuceLibraryCode/JuceHeader.h"
 #include "LabsLogo.h"
+#include "../PluginProcessor.h"
 
 //==============================================================================
 /*
 */
-class LogoAndTitle    : public Component
+class LogoAndTitle    : public Button
 {
 public:
-    LogoAndTitle();
+    LogoAndTitle(TheSeekerAudioProcessor& processor);
     ~LogoAndTitle();
 
-    void paint (Graphics&) override;
+	void paintButton(Graphics& g,
+		bool isMouseOverButton,
+		bool isButtonDown) override;
     void resized() override;
-    void mouseUp(const MouseEvent&) override;
+	void clicked() override;
 private:
+	void updateVisibleState();
     Label title;
     LabsLogo logo;
+	std::unique_ptr<AudioProcessorValueTreeState::ButtonAttachment> attachment;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LogoAndTitle)
 };

@@ -56,6 +56,24 @@ TheSeekerAudioProcessor::TheSeekerAudioProcessor() :
 		nullptr,
 		false,
 		false);
+	parameters.createAndAddParameter("showsettings", // parameter ID
+		"Show Settings", // parameter name
+		{},
+		NormalisableRange<float>(0.0f, 1.0f, 1.0f),
+		0.0f,
+		nullptr,
+		nullptr,
+		false,
+		false);
+	parameters.createAndAddParameter("showlogo", // parameter ID
+		"Show Logo", // parameter name
+		{},
+		NormalisableRange<float>(0.0f, 1.0f, 1.0f),
+		0.0f,
+		nullptr,
+		nullptr,
+		false,
+		false);
 
 	parameters.state = ValueTree(Identifier("TheSeekerSettings"));
 
@@ -233,37 +251,65 @@ void TheSeekerAudioProcessor::setStateInformation (const void* data, int sizeInB
 			parameters.replaceState(ValueTree::fromXml(*xmlState));
 	eqprocessor->setRms(*parameters.getRawParameterValue("time"));
 	eqprocessor->setEqType(static_cast<EQSpec::EQType>(std::max(0, int(*parameters.getRawParameterValue("res")) - 1)));
+	eqprocessor->level(*parameters.getRawParameterValue("level"));
 }
 
-void TheSeekerAudioProcessor::setRms(float ms) {
+void TheSeekerAudioProcessor::setRms(float ms) 
+{
 	//*plugindata.time = ms;
 	//parameters.getParameterAsValue("time").setValue(ms);
     eqprocessor->setRms(ms);
 }
 
-float TheSeekerAudioProcessor::rms() const {
+float TheSeekerAudioProcessor::rms() const 
+{
 	return *parameters.getRawParameterValue("time");
 }
 
-int TheSeekerAudioProcessor::numbands() const {
+int TheSeekerAudioProcessor::numbands() const
+{
     return eqprocessor->numbands();
 }
 
-void TheSeekerAudioProcessor::setEqType(EQSpec::EQType type) {
+void TheSeekerAudioProcessor::setEqType(EQSpec::EQType type) 
+{
 	//*plugindata.res = static_cast<int>(type) + 1;
 	//parameters.getParameterAsValue("res").setValue(static_cast<int>(type) + 1);
 	eqprocessor->setEqType(type);
 }
 
-int TheSeekerAudioProcessor::level() const {
+int TheSeekerAudioProcessor::level() const 
+{
     return *parameters.getRawParameterValue("level");
 }
 
-void TheSeekerAudioProcessor::level(int value) {
+void TheSeekerAudioProcessor::level(int value) 
+{
     eqprocessor->level(value);
 }
 
-AudioProcessorValueTreeState& TheSeekerAudioProcessor::data() {
+//bool TheSeekerAudioProcessor::showsettings() const
+//{
+//
+//}
+//
+//void TheSeekerAudioProcessor::showsettings(bool value)
+//{
+//
+//}
+//
+//bool TheSeekerAudioProcessor::showlogo() const 
+//{
+//
+//}
+//
+//void TheSeekerAudioProcessor::showlogo(bool value) 
+//{
+//
+//}
+
+AudioProcessorValueTreeState& TheSeekerAudioProcessor::data() 
+{
 	return this->parameters;
 }
 

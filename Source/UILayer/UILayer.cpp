@@ -15,7 +15,8 @@
 
 //==============================================================================
 UILayer::UILayer(TheSeekerAudioProcessor& processor) :
-settings(processor)
+settings(processor),
+logoandtitle(processor)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.

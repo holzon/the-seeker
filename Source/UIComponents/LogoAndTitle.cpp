@@ -12,7 +12,8 @@
 #include "LogoAndTitle.h"
 
 //==============================================================================
-LogoAndTitle::LogoAndTitle()
+LogoAndTitle::LogoAndTitle(TheSeekerAudioProcessor& processor) :
+Button("")
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
@@ -22,21 +23,31 @@ LogoAndTitle::LogoAndTitle()
     title.setJustificationType(Justification::topRight);
     logo.setInterceptsMouseClicks(false, false);
     title.setInterceptsMouseClicks(false, false);
+	setClickingTogglesState(true);
+	updateVisibleState();
+	attachment.reset(new AudioProcessorValueTreeState::ButtonAttachment(processor.data(), "showlogo", *this));
 }
 
 LogoAndTitle::~LogoAndTitle()
 {
 }
 
-void LogoAndTitle::paint (Graphics& g)
-{
+void LogoAndTitle::paintButton(Graphics& g,
+	bool isMouseOverButton,
+	bool isButtonDown) {
 
 }
 
-void LogoAndTitle::mouseUp(const MouseEvent& event)
+void LogoAndTitle::clicked()
 {
-    logo.setVisible(!logo.isVisible());
-    title.setVisible(!title.isVisible());
+	updateVisibleState();
+}
+
+void LogoAndTitle::updateVisibleState()
+{
+	bool visible = getToggleState();
+	logo.setVisible(visible);
+	title.setVisible(visible);
 }
 
 void LogoAndTitle::resized()

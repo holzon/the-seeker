@@ -18,22 +18,27 @@
 //==============================================================================
 /*
 */
-class SettingsPanel    : public Component
+class SettingsPanel    : public Button
 {
 public:
     SettingsPanel(TheSeekerAudioProcessor& processor);
     ~SettingsPanel();
 
     void paint (Graphics&) override;
+	void paintButton(Graphics& g,
+		bool isMouseOverButton,
+		bool isButtonDown) override;
     void resized() override;
-    void mouseUp(const MouseEvent&) override;
+	void clicked() override;
 private:
     void updateVisibleState();
     bool visible = true;
+	TheSeekerAudioProcessor& processor;
     OctaveSelect octaveselect;
     RmsSlider rmsslider;
     LevelSlider levelslider;
     DrawablePath hide_triangle;
 	DrawablePath show_triangle;
+	std::unique_ptr<AudioProcessorValueTreeState::ButtonAttachment> attachment;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SettingsPanel)
 };
