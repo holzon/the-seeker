@@ -10,9 +10,12 @@
 
 #include "SpectrumGraphComponent.h"
 
+#include <algorithm>
 #include <array>
 #include <cmath>
+#include <iomanip>
 #include <string>
+#include <sstream>
 
 namespace {
 
@@ -20,6 +23,13 @@ namespace {
 	// static std::array<float, 8> EQCalibration{ 1.3065629648763766f, 3.1136297131333874f, 6.057518690855654f, 12.028850466519177f, 24.014436726084917f, 48.00721980289169f, 96.00361008152873f, 192.00180506327794f };
 	//static std::array<float, 8> EQCalibration{ 1.0f, 3.0f, 6.0f, 12.0f, 24.0f, 48.0f, 96.0f, 192.0f };
 	static std::array<float, 8> EQCalibration { 1.0f, 1.7320508075688772f, 2.449489742783178f, 3.4641016151377544f, 4.898979485566356f, 6.928203230275509f, 9.797958971132712f, 13.856406460551018f };
+
+	template <typename T>
+	std::string tostring(const T& value) {
+		std::ostringstream ss;
+		ss << std::fixed << std::setprecision(1) << value;
+		return ss.str();
+	}
 
 }
 
@@ -32,7 +42,7 @@ SpectrumGraphComponent::SpectrumGraphComponent(std::shared_ptr<EQProcessor> eq, 
     gradient.addColour(1.0f, Colour(0.0f, 1.0f, 1.0f, 1.0f));
 
     setOpaque (true);
-
+	//addMouseListener(this, true);
 
 
     //openGLContext.setContinuousRepainting (true);
@@ -52,9 +62,9 @@ void SpectrumGraphComponent::timerCallback() {
 }
 
 void SpectrumGraphComponent::paint (Graphics& g) {
-    const int numbands = eq->numbands();
-    if (numbands != rms.size()) {
-        setnumbands(numbands);
+    const int eqnumbands = eq->numbands();
+    if (eqnumbands != rms.size()) {
+        setnumbands(eqnumbands);
     }
     int level_db = eq->level();
     float level_gain = Decibels::decibelsToGain(float(level_db));
@@ -86,9 +96,12 @@ void SpectrumGraphComponent::paint (Graphics& g) {
 
     gradient.point1 = Point<float>(0.0f, bandpixelheight);
     gradient.point2 = Point<float>(0.0f, 0.0f);
+
+    const int numbands = rms.size();
+	int	mouseoverband = std::min(static_cast<int>((mouse_x / (float)getWidth()) * numbands), numbands - 1);
+
     if (gutter == 0.0f) {
         const float weight = 1.0f / getWidth();
-        const auto numbands = rms.size();
         for (int i = 0; i < getWidth(); ++i) {
             int band = i * weight * numbands;
             //const auto bandyoffset = float(bands.size() - 1 - i) * bandpixelheight / bands.size();
@@ -195,10 +208,40 @@ void SpectrumGraphComponent::paint (Graphics& g) {
     g.drawText((std::to_string(level_db - 20) + " dB").c_str(), 15, dbScale * 30.0f - 11, 40, 20, Justification::left);
     g.drawText((std::to_string(level_db - 40) + " dB").c_str(), 15, dbScale * 50.0f - 11, 40, 20, Justification::left);
     g.drawText((std::to_string(level_db - 60) + " dB").c_str(), 15, dbScale * 70.0f - 11, 40, 20, Justification::left);
+
+	// display cursor data
+	if (displaydata) {
+		double frequency = eqspec.getband(mouseoverband).frequency;
+		double gain = Decibels::gainToDecibels(rms[mouseoverband] * rmsscale) - dBmax;
+		g.setColour(Colour(0xffffffff));
+		g.setFont(9.0f);
+		int displaypadding = 64;
+		int displayoffset_x = 20;
+		int displayoffset_y = -1;
+		int displaywidth = 100;
+		int displayheight = 20;
+		int displaypos_x = std::max(displaypadding, std::min(std::max(0, mouse_x) + displayoffset_x, getWidth() - displayoffset_x - displaywidth - displaypadding));
+		int displaypos_y = std::max(displaypadding, std::min(std::max(0, mouse_y) + displayoffset_y, getHeight() - displayoffset_y - displayheight - displaypadding));
+		g.drawText(("freq: " + tostring(frequency) + std::string(" Hz")).c_str(), displaypos_x, displaypos_y, 100, 10, Justification::left);
+		g.drawText(("gain: " + tostring(gain) + std::string(" dB")).c_str(), displaypos_x, displaypos_y + 10, 100, 10, Justification::left);
+	}
+
 }
 
 void SpectrumGraphComponent::resized() {
     //updatebars();
+}
+
+void SpectrumGraphComponent::mouseExit(const MouseEvent &event) {
+	displaydata = false;
+}
+
+void SpectrumGraphComponent::mouseMove(const MouseEvent &event) {
+	displaydata = true;
+	MouseEvent this_event = event.getEventRelativeTo(this);
+	mouse_x = this_event.x;
+	mouse_y = this_event.y;
+	AlertWindow("", "", AlertWindow::AlertIconType::InfoIcon);
 }
 
 void SpectrumGraphComponent::setnumbands(int numbands) {

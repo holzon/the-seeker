@@ -36,6 +36,8 @@ TheSeekerAudioProcessorEditor::TheSeekerAudioProcessorEditor (TheSeekerAudioProc
     //uilayer.toFront(true);
     setResizable (true, true);
     setSize (960, 360);
+	
+	uilayer.addMouseListener(&spectrumgraph, true);
 
     
 }

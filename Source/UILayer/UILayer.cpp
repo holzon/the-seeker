@@ -11,6 +11,8 @@
 #include "../../JuceLibraryCode/JuceHeader.h"
 #include "UILayer.h"
 
+#include <string>
+
 //==============================================================================
 UILayer::UILayer(TheSeekerAudioProcessor& processor) :
 settings(processor)
@@ -38,6 +40,21 @@ void UILayer::paint (Graphics& g)
     */
 
     //g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));   // clear the background
+
+	// display details
+	//if (displaydata) {
+	//	g.setColour(Colour(0xffffffff));
+	//	g.setFont(9.0f);
+	//	int displaypadding = 32;
+	//	int displayoffset_x = 20;
+	//	int displayoffset_y = -1;
+	//	int displaywidth = 100;
+	//	int displayheight = 20;
+	//	int displaypos_x = std::max(displaypadding, std::min(mouse_x + displayoffset_x, getWidth() - displayoffset_x - displaywidth - displaypadding * 2));
+	//	int displaypos_y = std::max(displaypadding, std::min(mouse_y + displayoffset_y, getHeight() - displayoffset_y - displayheight - displaypadding * 2));
+	//	g.drawText(("freq: " + std::to_string(int(3)) + std::string(" Hz")).c_str(), displaypos_x, displaypos_y, 100, 10, Justification::left);
+	//	g.drawText(("gain: " + std::to_string(int(3)) + std::string(" dB")).c_str(), displaypos_x, displaypos_y + 10, 100, 10, Justification::left);
+	//}
 }
 
 void UILayer::resized()
@@ -76,3 +93,14 @@ void UILayer::resized()
 //    title.setBounds(belowtop2right);
     //hello.setBounds (top);
 }
+
+//void UILayer::mouseExit(const MouseEvent &event) {
+//	displaydata = false;
+//}
+//
+//void UILayer::mouseMove(const MouseEvent &event) {
+//	displaydata = true;
+//	mouse_x = event.x;
+//	mouse_y = event.y;
+//	AlertWindow("", "", AlertWindow::AlertIconType::InfoIcon);
+//}

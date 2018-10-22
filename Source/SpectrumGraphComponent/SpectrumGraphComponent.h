@@ -26,6 +26,10 @@ public:
 
     void paint (Graphics&) override;
     void resized() override;
+
+	void mouseExit(const MouseEvent &event) override;
+	void mouseMove(const MouseEvent &event) override;
+
     void setnumbands(int bands);
 
 private:
@@ -38,6 +42,9 @@ private:
     std::vector<float> rms;
     std::vector<float> rmsgradient;
     float rmsscale;
+	bool displaydata = false;
+	int mouse_x = 0;
+	int mouse_y = 0;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SpectrumGraphComponent)
 };
