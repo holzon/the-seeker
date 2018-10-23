@@ -60,7 +60,7 @@ TheSeekerAudioProcessor::TheSeekerAudioProcessor() :
 		"Show Settings", // parameter name
 		{},
 		NormalisableRange<float>(0.0f, 1.0f, 1.0f),
-		0.0f,
+		1.0f,
 		nullptr,
 		nullptr,
 		false,
@@ -69,7 +69,7 @@ TheSeekerAudioProcessor::TheSeekerAudioProcessor() :
 		"Show Logo", // parameter name
 		{},
 		NormalisableRange<float>(0.0f, 1.0f, 1.0f),
-		0.0f,
+		1.0f,
 		nullptr,
 		nullptr,
 		false,
