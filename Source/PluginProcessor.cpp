@@ -50,7 +50,7 @@ TheSeekerAudioProcessor::TheSeekerAudioProcessor() :
 	parameters.createAndAddParameter("level", // parameter ID
 		"Level", // parameter name
 		{},
-		NormalisableRange<float>(-30.0f, 0.0f),
+		NormalisableRange<float>(-30.0f, 10.0f),
 		0.0f,
 		nullptr,
 		nullptr,

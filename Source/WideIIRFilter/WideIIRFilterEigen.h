@@ -119,6 +119,9 @@ WideIIRFilterEigen<N>::WideIIRFilterEigen(const EQSpec& eqspec) noexcept
     rmsscale = 0.0f;
     rmsscalesamples = 0;
     totalSampleMean.setZero();
+
+	rmsarray.setZero();
+	rmsgradient.setZero();
     
     // rmsscale for 1/1 : 4.74179792
     // rmsscale for 1/3 : 10.085021

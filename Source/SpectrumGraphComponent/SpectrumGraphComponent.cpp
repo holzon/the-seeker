@@ -98,7 +98,7 @@ void SpectrumGraphComponent::paint (Graphics& g) {
     gradient.point2 = Point<float>(0.0f, 0.0f);
 
     const int numbands = rms.size();
-	int	mouseoverband = std::min(static_cast<int>((mouse_x / (float)getWidth()) * numbands), numbands - 1);
+	int	mouseoverband = std::min(static_cast<int>((mouse_x / (float)std::max(1, getWidth())) * numbands), numbands - 1);
 	const float mouseovergain = -mouse_y / dbScale + dBmax;
 
     if (gutter == 0.0f) {
