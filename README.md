@@ -18,7 +18,4 @@ Licensed under GNU general public license v3, see [LICENSE](./LICENSE)
 - Build debug or release, depending on what you want to do
 - If you succeed to build, you should find plug-ins in the Builds directory
 
-# Issues
-- Plug-in is reportedly broken in Logic Pro X
-
 Have fun! Direct any questions to labs at himiltungl . com
